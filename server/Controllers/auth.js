@@ -1,25 +1,19 @@
-// const graph = require('fbgraph');
-// const conf = require('../config');
-// const db = require('../db/index');
+const controller = require('./controllers/index');
 
 module.exports = {
 //login
-  login: function(req, res) {
-  	//api get request to endpoint, get response data
- 	var response = null;
- 	$.ajax({
- 	  type: 'GET',
- 	  url: '/login/facebook',
- 	  success: function(data) {
- 	  	console.log(data);
- 	  	response = data;
- 	  }
- 	});
-  //   //If the person is logged into Facebook and your app, redirect them to your app's logged in experience.
-    res.send();
-    //If the person isn't logged into your app, or isn't logged into Facebook, prompt them with the Login dialog with FB.login() or show them the Login Button.
+ //  login: function(data) {
+ //  	//put data.body in the DB IF user does not exist 
+ //  	controller.users.get(data.body.email, function(response) {
+ //  	  if (err) {
+ //  	  	controller.users.post(data.body, function())
+ //  	  }
 
-   } 
- }
+ //  	});
+ //  	data.body
+ 	 
+
+ //   } 
+ // }
  	
 //logout

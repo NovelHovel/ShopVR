@@ -95,12 +95,12 @@
         'Thanks for logging in, ' + response.name + '!';
       console.log(response, 'response');
       userdata = response;
+      console.log(userdata, 'userdata');
 
       $.ajax({
        type: 'POST',
        url: '/login/facebook',
-       data: {fb: response, window: window.ui},
-       dataType: 'json',
+       data: response,
        success: function() {
          console.log('successfully posted on client side');
        },
