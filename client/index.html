@@ -25,15 +25,8 @@
       // take response data and pass via ajax call to server endpoint 
       // (then via server endpoint, use controller to check if already in DB
       // if not put it in DB)
-      $.ajax({
-        type: 'POST',
-        url: '/auth/login',
-        data: response,
-        success: function() {
-          console.log('successfully created user');
-        }
-      });
       testAPI();
+      
     } else if (response.status === 'not_authorized') {
       // The person is logged into Facebook, but not your app.
       document.getElementById('status').innerHTML = 'Please log ' +
@@ -95,12 +88,43 @@
   // successful.  See statusChangeCallback() for when this call is made.
   function testAPI() {
     console.log('Welcome!  Fetching your information.... ');
-    FB.api('/me', function(response) {
+    var userdata = null;
+    FB.api('/me', {fields: 'id, name, email, friends, gender, picture, locale, timezone, birthday, location'}, function(response) {
       console.log('Successful login for: ' + response.name);
       document.getElementById('status').innerHTML =
         'Thanks for logging in, ' + response.name + '!';
+      console.log(response, 'response');
+      userdata = response;
+
+      $.ajax({
+       type: 'POST',
+       url: '/login/facebook',
+       data: {fb: response, window: window.ui},
+       dataType: 'json',
+       success: function() {
+         console.log('successfully posted on client side');
+       },
+       error: function(error) {
+        console.log('Error in sending ajax data');
+       }
+     });
     });
   }
+
+  // function testAjax() {
+  //     $.ajax({
+  //     type: 'POST',
+  //     url: '/',
+  //     data: {hi:'hi'},
+  //     success: function() {
+  //       console.log('successfully posted on client side');
+  //     },
+  //     error: function(error) {
+  //         console.log('Error in sending ajax data');
+  //     }
+  //   });
+  // }
+  // testAjax();
 </script>
 
 <!--
@@ -109,7 +133,7 @@
   the FB.login() function when clicked.
 -->
 
-<fb:login-button scope="public_profile,email" onlogin="checkLoginState();">
+<fb:login-button scope="public_profile,email,user_friends" onlogin="checkLoginState();">
 </fb:login-button>
 
 <div id="status">
