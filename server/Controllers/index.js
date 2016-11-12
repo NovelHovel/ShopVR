@@ -40,15 +40,29 @@ module.exports = {
     get: function(req, res) {
       models.users.get(function(err, results) {
         if (err) console.log(err);
-        res.send(results);
+        // res.send(results);
       });
     },
     getAndPost: function(req, res) {
-      price = req.body.price ? req.body.price : 0;
-      var params = [req.body.name, req.body.email, req.body.gender, price, req.body.locale, req.body.timezone, req.body.location, req.body.friends. req.body.id, req.body.picture];
+      var params = [req.name, req.email, req.gender, req.locale, req.timezone, req.friends.summary.total_count, req.id, req.picture.data.url];
       models.users.getAndPost(params, function(err, results) {
-        if (err) console.log(err);
-        res.sendStatus(201);
+        if (err) {
+          console.log('error in controller', err);
+        } else {
+          console.log('complete');
+          res.sendStatus(201);
+        }
+      });
+    },
+    post: function(req, res) {
+      var params = [[req.name, req.email, req.gender, req.locale, req.timezone, req.friends.summary.total_count, req.id, req.picture.data.url]];
+      models.users.post(params, function(err, results) {
+        if (err) {
+          console.log('error in post controller', err);
+        } else {
+          console.log('complete');
+          res.sendStatus(201);
+        }
       });
     }
   }

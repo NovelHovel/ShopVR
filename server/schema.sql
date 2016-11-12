@@ -8,13 +8,11 @@ CREATE TABLE IF NOT EXISTS users (
   name VARCHAR(100) NOT NULL,
   email VARCHAR(100),
   gender VARCHAR(10),
-  price INT,
-  locale VARCHAR(8),
-  timezone INT,
-  location VARCHAR(100),
+  locale VARCHAR(10),
+  timezone VARCHAR(10),
+  friends VARCHAR(10000),
+  fb_id TEXT,
   profile_pic VARCHAR(1000),
-  friends INT,
-  fb_id INT,
   PRIMARY KEY (ID)
 );
 
