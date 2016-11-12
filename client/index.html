@@ -10,7 +10,8 @@
 
 </head>
 <body>
-  <!-- this is the FB SDK for login-->
+  <!-- this is the FB SDK for login 
+  Put this in react after mvp: http://stackoverflow.com/questions/27717555/implement-facebook-api-login-with-reactjs-->
   <script>
   // This is called with the results from from FB.getLoginStatus().
   function statusChangeCallback(response) {
@@ -89,7 +90,7 @@
   function testAPI() {
     console.log('Welcome!  Fetching your information.... ');
     var userdata = null;
-    FB.api('/me', {fields: 'id, name, email, friends, gender, picture, locale, timezone, birthday, location'}, function(response) {
+    FB.api('/me', {fields: 'id, name, email, friends, gender, picture, locale, timezone, location'}, function(response) {
       console.log('Successful login for: ' + response.name);
       document.getElementById('status').innerHTML =
         'Thanks for logging in, ' + response.name + '!';
