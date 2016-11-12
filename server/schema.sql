@@ -6,7 +6,7 @@ USE shopvr;
 CREATE TABLE IF NOT EXISTS users (
   id INT NOT NULL AUTO_INCREMENT UNIQUE,
   name VARCHAR(100) NOT NULL,
-  email VARCHAR(100),
+  email VARCHAR(100) UNIQUE,
   gender VARCHAR(10),
   locale VARCHAR(10),
   timezone VARCHAR(10),
